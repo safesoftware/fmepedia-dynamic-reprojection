@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Notification trigger event</title>
+
+        <!-- Bootstrap -->
+        <!--http://getbootstrap.com/2.3.2/-->
+        <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+        <link href="css/style.css" rel="stylesheet">
+
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false">
+        </script>
+        <script type="text/javascript" src="js/FMEServer.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">        
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+
+            <div class="brand">FME Server<span class="hidden-tiny"> Demos</span></div>
+               
+            <div class="nav-collapse collapse">
+              <a href="https://github.com/safesoftware/fmepedia-dynamic-reprojection" class="btn">
+                <img src="libs/GitHub.png"> Fork GitHub
+              </a>
+              <a href="https://github.com/safesoftware/fmepedia-dynamic-reprojection/archive/master.zip" class="btn">
+                <i class="icon-download-alt"></i> Download Zip
+              </a>
+            </div>
+            <span class="hidden-phone" id="safe-ribbon"><a href="http://www.safe.com">Powered by FME</a></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <form id="fmeForm" name="fmeForm" method="post" enctype="multipart/form-data">
+          </form>
+          <div id="map">
+          </div>
+        </div>
+    </body>
+</html>
