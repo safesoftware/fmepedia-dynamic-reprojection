@@ -87,7 +87,7 @@ function runWorkspaceJavascript(latLngObj){
 }
 
 /**
- * Called on the intiial pageload.
+ * Called on the intial pageload.
  */
 function init(){
     var centerLatLng = new google.maps.LatLng(30.3169444, -97.7427778);
