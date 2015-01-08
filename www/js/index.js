@@ -115,8 +115,8 @@ function runWorkspaceJavascript(latLngObj){
     pHttpMethod = "GET"
     // Create REST call
     pRestCall = pUrlBase + "?token=8be243c0fc2f5f34977050bdab57ebbdd3e72aa2";
-    pRestCall = pRestCall + "&YVALATTR="+ latLngObj.lng();
-    pRestCall = pRestCall + "&XVALATTR="+ latLngObj.lat();
+    pRestCall = pRestCall + "&YVALATTR="+ latLngObj.lat();
+    pRestCall = pRestCall + "&XVALATTR="+ latLngObj.lng();
 
     pRestCall += "&COORDSYS=" + document.fmeForm.elements[0].value;
 
