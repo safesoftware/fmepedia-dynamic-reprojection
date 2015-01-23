@@ -76,54 +76,15 @@ LatLngControl.prototype.updatePosition = function(latLng){
 function runWorkspaceJavascript(latLngObj){
 
     /*
-     Commonly available on the web, this function was taken from:
-     http://ajaxpatterns.org/XMLHttpRequest_Call
-     */
-    function createXMLHttpRequest(){
-        try {
-            return new XMLHttpRequest();
-        } 
-        catch (e) {
-        }
-        try {
-            return new ActiveXObject("Msxml2.XMLHTTP");
-        } 
-        catch (e) {
-        }
-        alert("XMLHttpRequest not supported");
-        return null;
-    }
-    /*
      Display the result when complete
      */
     function onResponse(inObj){
-        // 4 indicates a result is ready  
-        if (xhReq.readyState != 4) 
-            return;
-        // Get the response and display it
-        alert(xhReq.responseText);
-        
-        return;
+      alert(JSON.stringify(inObj));
     }
-    /*
-     Create the XMLHttpRequest object
-     */
-    var xhReq = createXMLHttpRequest();
-    // Request Variables
-    pHostName = "https://fmepedia2014-safe-software.fmecloud.com"
-    pUrlBase = pHostName+"/fmedatastreaming/Demos/000002007_reprojection_demo.fmw"
-    pHttpMethod = "GET"
-    // Create REST call
-    pRestCall = pUrlBase + "?token=8be243c0fc2f5f34977050bdab57ebbdd3e72aa2";
-    pRestCall = pRestCall + "&YVALATTR="+ latLngObj.lat();
-    pRestCall = pRestCall + "&XVALATTR="+ latLngObj.lng();
-
-    pRestCall += "&COORDSYS=" + document.fmeForm.elements[0].value;
-
-    // Send request
-    xhReq.open(pHttpMethod, pRestCall, true);
-    xhReq.onreadystatechange = onResponse;
-    xhReq.send();
+    var params = "YVALATTR="+ latLngObj.lng() + "&XVALATTR="+ latLngObj.lat() + "&COORDSYS=" + document.fmeForm.elements[0].value;
+    
+    FMEServer.runDataStreaming("Demos", "000002007_reprojection_demo.fmw", params, onResponse);
+>>>>>>> 00b949cdacba50ced904a17eca69c91c0cf0a794
 }
 
 /**
@@ -164,19 +125,21 @@ function init(){
     });
 
     //---- Initiate FME Server Objects ----//
-
-    FMEServer.init({
-        server : "https://fmepedia2014-safe-software.fmecloud.com",
-        token : "8be243c0fc2f5f34977050bdab57ebbdd3e72aa2"
+       
+    $.getJSON("http://demos.fmeserver.com.s3.amazonaws.com/server-demo-config.json", function(config) {
+      FMEServer.init({
+          server : config.initObject.server,
+          token : config.initObject.token
+      });
+      //FMEServer.getWorkspaceParameter("Demos", "000002007_reprojection_demo.fmw", "COORDSYS", generateForm);
+      FMEServer.getWorkspaceParameters("Demos", "000002007_reprojection_demo.fmw", generateForm);
     });
 
-    FMEServer.getWorkspaceParameter('Demos', '000002007_reprojection_demo.fmw', 'COORDSYS', generateForm);
 
     function generateForm( json ) {
-        var form = document.getElementById( "fmeForm" );
-
-        // Build the form items using the API
-        FMEServer.generateFormItem( "fmeForm", json );
+      // Build the form items using the API
+      console.log(json);
+      FMEServer.generateFormItems("fmeForm", json, ["COORDSYS"]);
     }
     
 }
