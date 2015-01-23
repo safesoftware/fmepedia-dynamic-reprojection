@@ -84,7 +84,6 @@ function runWorkspaceJavascript(latLngObj){
     var params = "YVALATTR="+ latLngObj.lng() + "&XVALATTR="+ latLngObj.lat() + "&COORDSYS=" + document.fmeForm.elements[0].value;
     
     FMEServer.runDataStreaming("Demos", "000002007_reprojection_demo.fmw", params, onResponse);
->>>>>>> 00b949cdacba50ced904a17eca69c91c0cf0a794
 }
 
 /**
